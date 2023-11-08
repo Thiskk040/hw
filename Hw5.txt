@@ -1,0 +1,118 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace HW5
+{
+    using System;
+
+    public class Node
+    {
+        public string Data { get; set; }
+        public Node Next { get; set; }
+
+        public Node(string data)
+        {
+            Data = data;
+            Next = null;
+        }
+    }
+
+    public class LinkedList
+    {
+        private Node head;
+
+        public LinkedList()
+        {
+            head = null;
+        }
+
+        // เพิ่ม Node ใหม่ไปยัง Linked List
+        public void Add(Node newNode)
+        {
+            if (head == null)
+            {
+                head = newNode;
+            }
+            else
+            {
+                Node current = head;
+                while (current.Next != null)
+                {
+                    current = current.Next;
+                }
+                current.Next = newNode;
+            }
+        }
+
+        // ค้นหา Node ที่มีข้อมูลตรงกับ parameter
+        public Node Find(string searchData)
+        {
+            Node current = head;
+            while (current != null)
+            {
+                if (current.Data == searchData)
+                {
+                    return current; // พบ Node ที่มีข้อมูลตรงกับ parameter
+                }
+                current = current.Next;
+            }
+            return null; // ไม่พบ Node ที่มีข้อมูลตรงกับ parameter
+        }
+
+        // เพิ่มเมธอด ToString สำหรับการแสดงข้อมูลใน LinkedList
+        public override string ToString()
+        {
+            Node current = head;
+            string result = "";
+            while (current != null)
+            {
+                result += current.Data + " > ";
+                current = current.Next;
+            }
+            result += "null";
+            return result;
+        }
+    }
+
+
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            LinkedList mylist = new LinkedList();
+
+            Node node1 = new Node("One");
+            Node node2 = new Node("Two");
+            Node node3 = new Node("Tree");
+
+            mylist.Add(node1);
+            mylist.Add(node2);
+            mylist.Add(node3);
+
+            Console.WriteLine("Linked List");
+            Console.WriteLine(mylist);
+
+            Node foundNode = mylist.Find("Two");
+            if (foundNode != null)
+            {
+                Console.WriteLine("Found Node: " + foundNode.Data);
+            }
+            else
+            {
+                Console.WriteLine("Not found Node");
+            }
+
+            foundNode = mylist.Find("Four");
+            if (foundNode != null)
+            {
+                Console.WriteLine("Found Node: " + foundNode.Data);
+            }
+            else
+            {
+                Console.WriteLine("Not found Node");
+            }
+        }
+    }
+
+}

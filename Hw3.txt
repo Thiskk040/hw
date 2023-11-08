@@ -1,0 +1,25 @@
+﻿using System;
+class Program
+{
+    static void Main(string[] args)
+    {
+        string[] lyrics = {
+   "เธอเข้ามาอ้อนทำเหมือนว่าอุ๋ง",
+   "เธอเข้ามาตกหัวใจ",
+   "มาตกให้ฉันอุ๋งฉันมะงึกทั้งหัวใจ",
+   "ไม่รู้ตัวมาก่อนจนเธอมายิ้มใส่",
+   "เธอทำให้ฉันมะงึกอยู่อย่างนั้น",
+   "จะไม่ให้อุ๋งเธอได้ไง"
+};
+    
+    for(int i  = 0;i < lyrics.Length ; i++)
+    {
+        Console.WriteLine(DecodeLyric(lyrics[i]));
+    }
+    }
+    private static string DecodeLyric(string inputString)
+    {
+        return inputString.Replace("อุ๋ง","รัก").Replace("มะงึก","คิดถึง");
+    }
+
+}

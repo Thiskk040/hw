@@ -1,0 +1,88 @@
+﻿using System;
+using System.Collections.Generic;
+
+class User
+{
+    public string Email { get; set; }
+    public int InviteCount { get; set; }
+
+    public User(string email, int inviteCount)
+    {
+        Email = email;
+        InviteCount = inviteCount;
+    }
+}
+
+class Coupon
+{
+    public string Code { get; set; }
+    public string Rank { get; set; }
+
+    public Coupon(string code, string rank)
+    {
+        Code = code;
+        Rank = rank;
+    }
+}
+
+class CouponGift
+{
+    public User User { get; set; }
+    public Coupon Coupon { get; set; }
+
+    public CouponGift(User user, Coupon coupon)
+    {
+        User = user;
+        Coupon = coupon;
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // สร้างรายการ User และ Coupon
+        List<User> users = new List<User>
+        {
+            new User("john@coldmail.com", 15),
+            new User("sam@pmail.co", 5),
+            new User("jane@hotmail.com", 8)
+        };
+
+        List<Coupon> coupons = new List<Coupon>
+        {
+            new Coupon("MAYDISCOUNT", "bad"),
+            new Coupon("PROMOTION45", "best"),
+            new Coupon("FREESHIPPING", "good")
+        };
+
+        List<CouponGift> couponGifts = new List<CouponGift>();
+
+        for (int i = 0; i < users.Count; i++)
+        {
+            User user = users[i];
+
+            for (int j = 0; j < coupons.Count; j++)
+            {
+                Coupon coupon = coupons[j];
+
+                if (coupon.Rank == "bad")
+                {
+                    continue;
+                }
+
+                if (coupon.Rank == "best" && user.InviteCount >= 10)
+                {
+                    couponGifts.Add(new CouponGift(user, coupon));
+                    Console.WriteLine($"User {user.Email} receive coupon code {coupon.Code}");
+                }
+                else if (coupon.Rank == "good")
+                {
+                    couponGifts.Add(new CouponGift(user, coupon));
+                    Console.WriteLine($"User {user.Email} receive coupon code {coupon.Code}");
+                }
+            }
+
+        }
+    }
+}
