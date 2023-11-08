@@ -1,0 +1,66 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace WorkshopWeek7
+{
+    public class Student
+    {
+        public string Name { get; set; }
+        public int Score { get; set; }
+
+        public void Print()
+        {
+            Console.WriteLine(Name + " has score: " + Score);
+        }
+
+        public Student(string name, int score)
+        {
+            this.Name = name;
+            this.Score = score;
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+
+            List<Student> studentList = new List<Student>();
+
+            studentList.Add(new Student("Shinji", 49));
+            studentList.Add(new Student("Asaka", 87));
+            studentList.Add(new Student("Rei", 65));
+            studentList.Add(new Student("Misato", 34));
+            studentList.Add(new Student("Gendo", 99));
+
+            Console.WriteLine("--- Student List ---");
+            foreach (Student student in studentList)
+            {
+                student.Print();
+            }
+
+            List<Student> certifiedStudentList = new List<Student>();
+
+            // Filter student with score lower than 50 out
+            // Statement here
+            foreach (Student student in studentList)
+            {
+                if (student.Score > 50)
+                {
+                    certifiedStudentList.Add(student);
+                }
+            }
+
+            Console.WriteLine("--- Certified Student List ---");
+            foreach (Student student in certifiedStudentList)
+            {
+                student.Print();
+            }
+
+
+        }
+    }
+
+}

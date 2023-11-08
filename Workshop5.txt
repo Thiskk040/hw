@@ -1,0 +1,80 @@
+﻿using System;
+
+public class EventHandlerBase
+{
+    public delegate void Notify();
+}
+public class Button
+{
+    public delegate void Notify();
+    public event Notify OnButtonClicked;
+
+
+
+    public void RemoveAllListener()
+    {
+        OnButtonClicked = null;
+    }
+
+    public void SimulateButtonClick()
+    {
+        Console.WriteLine("[Button]: Button Clicked");
+
+        OnButtonClicked?.Invoke();
+        // if(OnButtonClicked != null) {
+        // OnButtonClicked();
+    }
+
+}
+
+public class Form
+{
+    public void Submit()
+    {
+        Console.WriteLine("[Form]: Submit form data");
+    }
+}
+public class AudioManager
+{
+    public static void PlayClickSFX()
+    {
+        Console.WriteLine("[AudioManager]: Play click SFX");
+    }
+}
+
+
+public class LoadingBar : EventHandlerBase
+{
+    public event Notify OnLoadingCompleted;
+    public void SimulateLoadingComplete()
+    {
+        Console.WriteLine("[LoadingBar]: Loading Complete");
+    }
+}
+public class SceneManager : EventHandlerBase
+{
+
+    public static void LoadScene()
+    {
+    
+        Console.WriteLine("[SceneManager]: Load next scene");
+    }
+}
+
+
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        Button submitButton = new Button();
+        Form userRegistrationForm = new Form();
+        LoadingBar loadingBar = new LoadingBar();
+
+        submitButton.OnButtonClicked += userRegistrationForm.Submit;
+        submitButton.OnButtonClicked += AudioManager.PlayClickSFX;
+        loadingBar.OnLoadingCompleted += SceneManager.LoadScene;
+
+        submitButton.SimulateButtonClick();
+        loadingBar.SimulateLoadingComplete();
+    }
+}

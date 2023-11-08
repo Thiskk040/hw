@@ -1,0 +1,96 @@
+﻿using System;
+using System.Collections.Generic;
+namespace test1
+{
+    public abstract class Post
+    {
+        public string Content { get; set; } = string.Empty;
+        public string UserName { get; set; } = string.Empty;
+
+        public abstract void Display();
+    }
+
+    public class TextPost : Post
+    {
+        public override void Display()
+        {
+            Console.WriteLine("Text Post by " + UserName + ": " + Content);
+        }
+    }
+
+    public class ImagePost : Post
+    {
+        public string ImageUrl { get; set; } = string.Empty;
+
+        public override void Display()
+        {
+            Console.WriteLine("Image Post by " + UserName + ": " + Content);
+            Console.WriteLine("Image URL: " + ImageUrl);
+        }
+    }
+
+ public class videoPost : Post
+    {
+        public string VidUrl { get; set; } = string.Empty;
+
+        public override void Display()
+        {
+            Console.WriteLine("Vidoe Post by " + UserName + ": " + Content);
+            Console.WriteLine("Videoe URL: " + VidUrl);
+        }
+    }
+    class MainClass
+    {
+        public static void Main(string[] args)
+        {
+            List<Post> postList = new List<Post>();
+
+            TextPost textPost1 = new TextPost
+            {
+                UserName = "Alice",
+                Content = "Hello, World!"
+            };
+            TextPost textPost2 = new TextPost
+            {
+                UserName = "Bob",
+                Content = "C# is fun!"
+            };
+
+            ImagePost imagePost1 = new ImagePost
+            {
+                UserName = "Charlie",
+                Content = "Beautiful sunset",
+                ImageUrl = "sunset.jpg"
+            };
+            ImagePost imagePost2 = new ImagePost
+            {
+                UserName = "Diana",
+                Content = "Cute cat",
+                ImageUrl = "cat.jpg"
+            };
+
+            videoPost videoPost1 = new videoPost
+            {
+                UserName = "Charlie",
+                Content = "Funny cat videos",
+                VidUrl = "cat video.mp4"
+            };
+
+            postList.Add(textPost1);
+            postList.Add(textPost2);
+            postList.Add(imagePost1);
+            postList.Add(imagePost2);
+            postList.Add(videoPost1);
+
+            foreach (Post post in postList)
+            {
+                post.Display();
+                Console.WriteLine("------");
+            }
+
+        }
+
+
+    }
+
+}

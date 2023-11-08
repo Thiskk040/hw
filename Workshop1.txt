@@ -1,0 +1,104 @@
+﻿using System;
+
+public class BankAccount
+{
+    private string _accountNumber;
+    private string _accountHolderName;
+    private double _balance;
+
+    public BankAccount(string accountNumber, string accountHolderName)
+    {
+        this._accountNumber = accountNumber;
+        this._accountHolderName = accountHolderName;
+        _balance = 0.0;
+    }
+
+    public void Deposit(double amount)
+    {
+        if(amount < 0)
+        {
+            Console.WriteLine(
+                "Invalid deposit amount. "
+                + "Amount must be greater than zero"
+            );
+            return;
+        }
+
+        _balance = _balance + amount;
+        Console.WriteLine($"{amount} deposited. New balance: {_balance}" );
+    }
+
+    public void Withdraw(double amount)
+    {
+        if(amount < 0)
+        {
+            Console.WriteLine(
+                "Invalid deposit amount. "
+                + "Amount must be greater than zero"
+            );
+            return;
+        }
+        if(_balance < amount)
+        {
+            Console.WriteLine("Insufficient balance for withdrawal.");
+            return;
+        }
+
+        _balance = _balance - amount;
+        Console.WriteLine(amount + " withdrawd. New balance: " + _balance);
+    }
+    public void CheckBalance()
+    {
+    Console.WriteLine("Account Number: " + _accountNumber);
+    Console.WriteLine("Account Holder: " + _accountHolderName);
+    Console.WriteLine("Balance: " + _balance);
+    }
+
+    public double GetBalance()
+    {
+        return _balance;
+    }
+
+    public string GetAccountHolderName()
+    {
+        return _accountHolderName;
+    }
+}
+    public class BankingApp
+    {
+        public static bool Transfer (
+            BankAccount sender,
+            BankAccount receiver,
+            double amount
+        )
+        {
+            // Console.WriteLine("### TRANSFER ###");
+            // Console.WriteLine("Sender has balance: " + sender._GetBalance());
+            return true;
+        }
+    }
+
+public class Program
+{
+    public static void Main(string[] args)
+    {
+    // Create two bank accounts
+    BankAccount account1 = new BankAccount("123456", "Alice");
+    BankAccount account2 = new BankAccount("789012", "Bob");
+
+    // Perform some transactions
+    account1.Deposit(1000);
+    account2.Deposit(500);
+
+    // Transfer balance
+    BankingApp.Transfer(account1, account2, 100);
+    BankingApp.Transfer(account2, account1, -100);
+    BankingApp.Transfer(account2, account1, 999999);
+
+    // Check balances
+    account1.CheckBalance();
+    account2.CheckBalance();
+
+    BankingApp.Transfer(account1, account2, 500.0);
+    }
+}
